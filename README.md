@@ -2,6 +2,8 @@
 
 Application de gestion de badge
 
+https://aiven.io/
+
 ## Table des matières
 
 -   [Installation](#installation)
@@ -46,7 +48,7 @@ Application de gestion de badge
 5. Copiez le fichier .env.example en tant que .env :
 
     ```bash
-    $ cp .env.sample .env
+    $ cp .env.example .env
     ```
 
     Modifiez les variables d'environnement dans le fichier .env selon vos besoins.
