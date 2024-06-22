@@ -14,7 +14,7 @@ class UserAdmin(DjangoUserAdmin):
         "has_pionner",
         "has_collector",
     )
-    DjangoUserAdmin.fieldsets += ((_("User info"), {"fields": ("job", "picture")}),)
+    DjangoUserAdmin.fieldsets += ((_("User info"), {"fields": ("job", "picture", "has_starter")}),)
 
 
 class AnnimeVideoAdmin(admin.ModelAdmin):
@@ -45,7 +45,7 @@ class AnnimeVideoAdmin(admin.ModelAdmin):
                 )
             },
         ),
-        ("Video", {"fields": ("portrait", "file")}),
+        ("Video", {"fields": ("portrait", "file", )}),
     )
 
     search_fields = ("author",)
