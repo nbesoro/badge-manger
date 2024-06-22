@@ -1,3 +1,4 @@
+{% load humanize %}
 <!DOCTYPE html>
 <html lang="fr">
 	<head>
@@ -30,7 +31,7 @@
 				<img
 					class="mr-6"
 					style="width: 300px"
-					src="./static/images/portrait-7676482_640.jpg"
+					src="{{ user.picture.url }}"
 				/>
 				<div class="flex flex-col justify-center">
 					<!-- content -->
@@ -39,45 +40,57 @@
 					>
 						Profile
 					</h4>
-					<h1 class="mt-0 mb-2 text-gray-600 text-4xl">Nbe Soro</h1>
+					<h1 class="mt-0 mb-2 text-gray-600 text-4xl">{{ user.get_full_name }}</h1>
 
 					<p class="text-gray-600 mb-2 text-sm">
-						With J. Cole, Quavo, Ty Dollar $ign
+						{{ user.job }}
 					</p>
 					<p class="text-gray-600 mb-2 text-sm">
-						Inscrit <a>Il y'a 3 jour</a>
+						Inscrit <a>{{ user.date_joined|naturaltime}}</a>
 					</p>
 					<div class="flex space-x-2">
-						<div
-							style="padding-top: 0.2em; padding-bottom: 0.2rem"
-							class="flex items-center space-x-1 text-xs px-2 bg-gray-200 text-gray-800 rounded-full"
-						>
+						
+						{% if user.has_starter %}	
 							<div
-								style="width: 0.4rem; height: 0.4rem"
-								class="bg-red-500 rounded-full"
-							></div>
-							<div>Étoile Montante</div>
-						</div>
-						<div
-							style="padding-top: 0.2em; padding-bottom: 0.2rem"
-							class="flex items-center space-x-1 text-sm px-2 bg-gray-200 text-gray-800 rounded-full"
-						>
+								style="padding-top: 0.2em; padding-bottom: 0.2rem"
+								class="flex items-center space-x-1 text-xs px-2 bg-gray-200 text-gray-800 rounded-full"
+							>
+								<div
+									style="width: 0.4rem; height: 0.4rem"
+									class="bg-red-500 rounded-full"
+								></div>
+								<div>Étoile Montante</div>
+							</div>
+						{% endif %}
+							
+						
+						{% if user.has_collector %}	
 							<div
-								style="width: 0.4rem; height: 0.4rem"
-								class="bg-red-500 rounded-full"
-							></div>
-							<div>Collectionneur</div>
-						</div>
-						<div
-							style="padding-top: 0.2em; padding-bottom: 0.2rem"
-							class="flex items-center space-x-1 text-sm px-2 bg-gray-200 text-gray-800 rounded-full"
-						>
+								style="padding-top: 0.2em; padding-bottom: 0.2rem"
+								class="flex items-center space-x-1 text-sm px-2 bg-gray-200 text-gray-800 rounded-full"
+							>
+								<div
+									style="width: 0.4rem; height: 0.4rem"
+									class="bg-red-500 rounded-full"
+								></div>
+								<div>Collectionneur</div>
+							</div>
+						{% endif %}
+						
+						
+						{% if user.has_pionner %}	
 							<div
-								style="width: 0.4rem; height: 0.4rem"
-								class="bg-red-500 rounded-full"
-							></div>
-							<div>Vétéran</div>
-						</div>
+								style="padding-top: 0.2em; padding-bottom: 0.2rem"
+								class="flex items-center space-x-1 text-sm px-2 bg-gray-200 text-gray-800 rounded-full"
+							>
+								<div
+									style="width: 0.4rem; height: 0.4rem"
+									class="bg-red-500 rounded-full"
+								></div>
+								<div>Vétéran</div>
+							</div>
+						{% endif %}
+							
 					</div>
 				</div>
 			</div>
@@ -93,28 +106,21 @@
 					<div class="p-2 w-12 flex-shrink-0 text-right">Views</div>
 				</div>
 
-				<div
-					class="flex border-b text-gray-600 border-gray-800 hover:bg-gray-800 hover:text-white"
-				>
-					<div class="p-3 w-8 flex-shrink-0">▶️</div>
-					<div class="p-3 w-full">
-						<a href="./detail.html">My Song Here</a>
+				
+				{% for user_annime in user_annimes %}	
+					<div
+						class="flex border-b text-gray-600 border-gray-800 hover:bg-gray-800 hover:text-white"
+					>
+						<div class="p-3 w-8 flex-shrink-0">▶️</div>
+						<div class="p-3 w-full">
+							<a href="./detail.html">{{ user_annime.title }}</a>
+						</div>
+						<div class="p-3 w-full">{{ user_annime.author.get_full_name }}</div>
+						<div class="p-3 w-full">{{ user_annime.created_at|naturaltime}}</div>
+						<div class="p-3 w-12 flex-shrink-0 text-right">{{ user_annime.number_of_views}}</div>
 					</div>
-					<div class="p-3 w-full">Nbe Soro</div>
-					<div class="p-3 w-full">Il y'a 2 jours</div>
-					<div class="p-3 w-12 flex-shrink-0 text-right">200</div>
-				</div>
-				<div
-					class="flex border-b text-gray-600 border-gray-800 hover:bg-gray-800 hover:text-white"
-				>
-					<div class="p-3 w-8 flex-shrink-0">▶️</div>
-					<div class="p-3 w-full">
-						<a href="./detail.html">My Song Here</a>
-					</div>
-					<div class="p-3 w-full">Nbe Soro</div>
-					<div class="p-3 w-full">Il y'a 2 jours</div>
-					<div class="p-3 w-12 flex-shrink-0 text-right">200</div>
-				</div>
+				{% endfor %}
+					
 			</div>
 		</div>
 	</body>
