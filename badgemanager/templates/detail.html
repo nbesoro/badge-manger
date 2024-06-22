@@ -25,7 +25,7 @@
 			<div>
 				<div class="flex flex-col items-center">
 					<video
-						src="./static/videos/27400-363524230_tiny.mp4"
+						src="{{ annime.file.url }}"
 						controls
 						class="h-80 border border-gray-200 rounded-lg dark:border-gray-700"
 					></video>
@@ -33,35 +33,25 @@
 
 				<div class="p-4">
 					<h2 class="text-lg font-bold text-gray-900 mb-2">
-						Titre de la Carte
+						{{ annime.title }}
 					</h2>
 					<div class="flex items-center text-gray-500">
 						<span>Publié le:</span>
-						<span class="ml-2">2024-05-28</span>
+						<span class="ml-2">{{ annime.created_at|date:"Y-m-d"}}</span>
 					</div>
 
 					<div class="flex items-center mt-4">
 						<img
-							src="./static/images/portrait-7676482_640.jpg"
+							src="{{ annime.author.picture.url }}"
 							alt="Photo de l'auteur"
 							class="w-8 h-8 rounded-full mr-2"
 						/>
 						<a href="./profile.html">
-							<span class="text-lg font-bold">Auteur</span>
+							<span class="text-lg font-bold">{{ annime.author.get_full_name }}</span>
 						</a>
 					</div>
 					<p class="text-gray-700 mb-4">
-						Lorem Ipsum is simply dummy text of the printing and
-						typesetting industry. Lorem Ipsum has been the
-						industry's standard dummy text ever since the 1500s,
-						when an unknown printer took a galley of type and
-						scrambled it to make a type specimen book. It has
-						survived not only five centuries, but also the leap into
-						electronic typesetting, remaining essentially unchanged.
-						It was popularised in the 1960s with the release of
-						Letraset sheets containing Lorem Ipsum passages, and
-						more recently with desktop publishing software like
-						Aldus PageMaker including versions of Lorem Ipsum.
+						{{ annime.description }}
 					</p>
 				</div>
 			</div>

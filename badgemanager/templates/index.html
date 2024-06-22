@@ -1,4 +1,6 @@
 {% load static %}
+{% load humanize %}
+
 <!DOCTYPE html>
 <html lang="fr">
 	<head>
@@ -28,42 +30,46 @@
 		<div class="container mx-auto px-4 py-8">
 			<h1 class="text-3xl font-bold text-center mb-8">Liste de Cartes</h1>
 
-			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-				<div class="bg-white rounded-lg shadow-md">
-					<img
-						src="{% static 'images/seagull-4795739_640.jpg' %}"
-						alt="Image de la carte"
-						class="w-full h-40 object-cover rounded-t-lg"
-					/>
-					<div class="p-4">
-						<div class="flex justify-between">
-							<a href="./detail.html">
-								<h3 class="text-lg font-bold mb-2">
-									Titre de la carte
-								</h3>
-							</a>
-							<div class="flex items-center text-gray-500">
-								<i class="fa fa-solid fa-eye ml-4 mr-2"></i>
-								<span id="view-count-1">100</span>
+			
+			{% for annime in annimes %}	
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+					<div class="bg-white rounded-lg shadow-md">
+						<img
+							src="{{ annime.portrait.url }}"
+							alt="Image de la carte"
+							class="w-full h-40 object-cover rounded-t-lg"
+						/>
+						<div class="p-4">
+							<div class="flex justify-between">
+								<a href="{% url 'detail' annime.pk %}">
+									<h3 class="text-lg font-bold mb-2">
+										{{ annime.title }}
+									</h3>
+								</a>
+								<div class="flex items-center text-gray-500">
+									<i class="fa fa-solid fa-eye ml-4 mr-2"></i>
+									<span id="view-count-1">{{ annime.number_of_views }}</span>
+								</div>
 							</div>
-						</div>
-						<div class="flex justify-between">
-							<div class="flex items-center">
-								<img
-									src="{% static 'images/portrait-7676482_640.jpg' %}"
-									alt="Photo de l'auteur"
-									class="w-8 h-8 rounded-full mr-2"
-								/>
-								<a href="./profile.html"><span>Auteur</span></a>
-							</div>
-							<div class="flex items-center text-gray-500">
-								<i class="fa fa-solid fa-calendar mr-2"></i>
-								<span id="time-ago-1">Il y a X jours</span>
+							<div class="flex justify-between">
+								<div class="flex items-center">
+									<img
+										src="{% static 'images/portrait-7676482_640.jpg' %}"
+										alt="Photo de l'auteur"
+										class="w-8 h-8 rounded-full mr-2"
+									/>
+									<a href="./profile.html"><span>{{ annime.author.get_full_name }}</span></a>
+								</div>
+								<div class="flex items-center text-gray-500">
+									<i class="fa fa-solid fa-calendar mr-2"></i>
+									<span id="time-ago-1">{{ annime.created_at|naturaltime }}</span>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+			{% endfor %}
+				
 		</div>
 	</body>
 </html>
